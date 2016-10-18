@@ -7,7 +7,7 @@
 
   "content_scripts": [{
     "js": ["content.js"],
-    "matches": ["https://drill.gghc.com/security_detail.aspx*"]
+    "matches": ["https://drill.gghc.com/security_detail.aspx*", "https://drill.gghc.com/"]
   }]
 
 }
