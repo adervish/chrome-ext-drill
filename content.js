@@ -9,6 +9,8 @@ exMap['.as'] = 'EPA';
 exMap['.l'] = 'LON';
 exMap['.br'] = 'EBR';
 exMap['.mi'] = 'BIT';
+exMap['.de'] = 'FRA';
+//exMap['']
 //console.log("running");
 
 //chrome.webRequest.onBeforeRequest.addListener(
@@ -42,41 +44,63 @@ if ( document.URL.indexOf("security_detail.aspx") != -1)
 			if( myArray[2] == null )
 				images[i].src = 'http://stockcharts.com/c-sc/sc?s=' + myArray[1] + '&p=D&yr=2&mn=0&dy=0&i=t62538121274&r=1476907012474'; 
 			else
+			{
+				console.log("mapping " + myArray[2] + " to " + exMap[ myArray[2] ]);
 				images[i].src = 'http://www.google.com/finance/getchart?q='+ myArray[1].toUpperCase() +'&x=' + exMap[ myArray[2] ] + '&p=2Y&i=86400';
+			}
 		}
 	}
 }
-else 
+else if( 1 == 0 )
 {
-
 	
 	var div = document.getElementById("Summaries_mmGraph");
 	console.log(div);
-	
-	div.id = 'sleepnomore';
-	div.innerHTML = "";
-	
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-			
-			doc = this.responseXML;
-			
-			var odd = doc.getElementsByClassName("TD_odd");
-			var even = doc.getElementsByClassName("TD_even");
-			//var order_rows = Array();
-			//var order_rows = odd.concat(even);
-			for( var i=0, l=even.length; i<l; i++ )
-			{
-				cols = even[i].getElementsByTagName("td");
-				console.log( cols[1].innerHTML);
-			}
+		
+	if( div != null )
+	{
 
-	    }
-	};
-	xhttp.responseType = "document";
-	xhttp.open("GET", "https://drill.gghc.com/orders_noMaster.aspx", true);
-	xhttp.send();
+		console.log(div.parentNode);
+
+	
+		//div.id = 'sleepnomore';
+		//div.innerHTML = "";
+
+		var newDiv = document.createElement("DIV");  
+
+		newDiv.style.height = "250px";
+		//newDiv.style.min-width = "400px"
+		newDiv.margin = "0px"
+		div.parentNode.appendChild(newDiv);
+	
+		console.log( div.innerHTML );
+		div.style.display = 'none';
+	
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+	    	if (this.readyState == 4 && this.status == 200) {
+			
+				//doc = this.responseXML;
+				newDiv.innerHTML = xhttp.responseText;
+				//var odd = doc.getElementsByClassName("TD_odd");
+				//var even = doc.getElementsByClassName("TD_even");
+				//for( var i=0, l=even.length; i<l; i++ )
+				//{
+					//	cols = even[i].getElementsByTagName("td");
+					//	console.log( cols[1].innerHTML);
+					//}
+
+	    		}
+			};
+			
+			newDiv.innerHTML = "hello world";
+		//xhttp.responseType = "document";
+		xhttp.withCredentials = true;
+		
+		xhttp.open("GET", "https://drill.gghc.com/orders_noMaster.aspx", false);
+		xhttp.send();
+}
+
 	
 //	var graphs = document.getElementsByClassName("highcharts-series-group");
 //	console.log(graphs)
