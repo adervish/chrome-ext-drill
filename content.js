@@ -62,8 +62,7 @@ else
 
 		console.log(div.parentNode);
 
-	
-		//div.id = 'sleepnomore';
+		div.id = 'sleepnomore';
 		//div.innerHTML = "";
 
 		div.id = "allaheadfull";
@@ -81,26 +80,27 @@ else
 		xhttp.onreadystatechange = function() {
 	    	if (this.readyState == 4 && this.status == 200) {
 			
-				var content = xhttp.responseText;
-				//doc = this.responseXML;
-				console.log(xhttp.responseText );
+				//var content = xhttp.responseText;
+				doc = this.responseXML;
+				//console.log(xhttp.responseText );
 				//newDiv.innerHTML = xhttp.responseText;
 				//var odd = doc.getElementsByClassName("TD_odd");
-				//var even = doc.getElementsByClassName("TD_even");
-				//for( var i=0, l=even.length; i<l; i++ )
-				//{
-					//	cols = even[i].getElementsByTagName("td");
-					//	console.log( cols[1].innerHTML);
-					//}
-
-	    		}
-			};
+				newDiv.innerHTML = "<table>" + doc.getElementsByTagName("table")[0].innerHTML + "</table>";
+				var even = doc.getElementsByClassName("TD_even");
+				for( var i=0, l=even.length; i<l; i++ )
+				{
+						cols = even[i].getElementsByTagName("td");
+						//newDiv.innerHTML = cols[1].innerHTML;
+						console.log( cols[1].innerHTML);
+				}
+	    	}
+		};
 			
-			newDiv.innerHTML = "hello world";
-		//xhttp.responseType = "document";
+			//newDiv.innerHTML = "hello world";
+		xhttp.responseType = "document";
 		xhttp.withCredentials = true;
 		
-		xhttp.open("GET", "https://drill.gghc.com/orders_noMaster.aspx", false);
+		xhttp.open("GET", "https://drill.gghc.com/orders_noMaster.aspx", true);
 		xhttp.send();
 }
 
