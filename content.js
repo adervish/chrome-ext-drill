@@ -51,7 +51,7 @@ if ( document.URL.indexOf("security_detail.aspx") != -1)
 		}
 	}
 }
-else if( 1 == 0 )
+else 
 {
 	
 	var div = document.getElementById("Summaries_mmGraph");
@@ -66,6 +66,7 @@ else if( 1 == 0 )
 		//div.id = 'sleepnomore';
 		//div.innerHTML = "";
 
+		div.id = "allaheadfull";
 		var newDiv = document.createElement("DIV");  
 
 		newDiv.style.height = "250px";
@@ -80,8 +81,10 @@ else if( 1 == 0 )
 		xhttp.onreadystatechange = function() {
 	    	if (this.readyState == 4 && this.status == 200) {
 			
+				var content = xhttp.responseText;
 				//doc = this.responseXML;
-				newDiv.innerHTML = xhttp.responseText;
+				console.log(xhttp.responseText );
+				//newDiv.innerHTML = xhttp.responseText;
 				//var odd = doc.getElementsByClassName("TD_odd");
 				//var even = doc.getElementsByClassName("TD_even");
 				//for( var i=0, l=even.length; i<l; i++ )
