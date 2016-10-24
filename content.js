@@ -65,17 +65,16 @@ else
 		div.id = 'sleepnomore';
 		//div.innerHTML = "";
 
-		div.id = "allaheadfull";
 		var newDiv = document.createElement("DIV");  
+		div.style.display = 'none';
+		div.parentNode.appendChild(newDiv);
 
 		newDiv.style.height = "250px";
 		//newDiv.style.min-width = "400px"
 		newDiv.margin = "0px"
+
 		div.parentNode.appendChild(newDiv);
-	
-		console.log( div.innerHTML );
-		div.style.display = 'none';
-	
+		
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 	    	if (this.readyState == 4 && this.status == 200) {
