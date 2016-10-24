@@ -4,10 +4,12 @@
   "name": "Fix broken graphs in drill",
   "version": "0.1.0",
   "description": "Fix graphs in drill",
-
+  "permissions": [ "<all_urls>",
+    "webRequest", "webRequestBlocking"
+  ],
   "content_scripts": [{
     "js": ["content.js"],
-    "matches": ["https://drill.gghc.com/security_detail.aspx*", "https://drill.gghc.com/"]
+    "matches": ["https://drill.gghc.com/security_detail.aspx*", "https://drill.gghc.com/*"]
   }]
 
 }
