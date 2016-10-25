@@ -10,21 +10,6 @@ exMap['.l'] = 'LON';
 exMap['.br'] = 'EBR';
 exMap['.mi'] = 'BIT';
 exMap['.de'] = 'FRA';
-//exMap['']
-//console.log("running");
-
-//chrome.webRequest.onBeforeRequest.addListener(
-//    function(details) {
-//        if( details.url.startsWith("https://drill.gghc.com/extras/performance/performance_graph_JSON.aspx") )
-//            return {redirectUrl: "bleep.com" };
-//    },
-//    {urls: ["*://drill.gghc.com/.*"]},
-//    ["blocking"]);
-
-//initChart = function initChart() {
-//	
-//	console.log("init chart");
-//}
 
 if ( document.URL.indexOf("security_detail.aspx") != -1)
 {
@@ -32,10 +17,6 @@ if ( document.URL.indexOf("security_detail.aspx") != -1)
 	var re = /http:\/\/chart.yahoo.com\/c\/1y\/.*\/(.*?)(\.[a-z]+)?\.gif/;
 	for (var i = 0, l = images.length; i < l; i++) {
 		var myArray = images[i].src.match(re);
-		console.log(myArray);
-		console.log(images[i].src);
-	
-	
 		if(  myArray != null )
 		{
 			if( myArray[2] == ".hk" && myArray[1].length == 3 )
@@ -55,15 +36,10 @@ else
 {
 	
 	var div = document.getElementById("Summaries_mmGraph");
-	console.log(div);
 		
 	if( div != null )
 	{
-
-		console.log(div.parentNode);
-
 		div.id = 'sleepnomore';
-		//div.innerHTML = "";
 
 		var newDiv = document.createElement("DIV");  
 		div.style.display = 'none';
@@ -85,13 +61,13 @@ else
 				//newDiv.innerHTML = xhttp.responseText;
 				//var odd = doc.getElementsByClassName("TD_odd");
 				newDiv.innerHTML = "<table>" + doc.getElementsByTagName("table")[0].innerHTML + "</table>";
-				var even = doc.getElementsByClassName("TD_even");
-				for( var i=0, l=even.length; i<l; i++ )
-				{
-						cols = even[i].getElementsByTagName("td");
+				//var even = doc.getElementsByClassName("TD_even");
+				//for( var i=0, l=even.length; i<l; i++ )
+				//{
+				//		cols = even[i].getElementsByTagName("td");
 						//newDiv.innerHTML = cols[1].innerHTML;
-						console.log( cols[1].innerHTML);
-				}
+				//		console.log( cols[1].innerHTML);
+				//}
 	    	}
 		};
 			
