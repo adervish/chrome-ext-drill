@@ -26,6 +26,9 @@ exMap['.de'] = 'FRA';
 //	console.log("init chart");
 //}
 
+
+console.log("top of extension");
+
 if ( document.URL.indexOf("security_detail.aspx") != -1)
 {
 	var images = document.getElementsByTagName('img');
@@ -53,55 +56,74 @@ if ( document.URL.indexOf("security_detail.aspx") != -1)
 }
 else 
 {
-	
 	var div = document.getElementById("Summaries_mmGraph");
 	console.log(div);
 		
+	// https://jsfiddle.net/api/post/library/pure/ 
+	
 	if( div != null )
 	{
 
+
+
 		console.log(div.parentNode);
 
+
+
 		div.id = 'sleepnomore';
+		div.style.width = "0px";
+		div.style.height = "0px";
 		//div.innerHTML = "";
 
-		var newDiv = document.createElement("DIV");  
+		var newDiv = document.createElement("canvas");  
+		
 		div.style.display = 'none';
 		div.parentNode.appendChild(newDiv);
 
 		newDiv.style.height = "250px";
+		newDiv.style.width = "400px";
 		//newDiv.style.min-width = "400px"
 		newDiv.margin = "0px"
+		newDiv.id = 'chart_canvas';
 
 		div.parentNode.appendChild(newDiv);
 		
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 	    	if (this.readyState == 4 && this.status == 200) {
-			
-				//var content = xhttp.responseText;
-				doc = this.responseXML;
-				//console.log(xhttp.responseText );
-				//newDiv.innerHTML = xhttp.responseText;
-				//var odd = doc.getElementsByClassName("TD_odd");
-				newDiv.innerHTML = "<table>" + doc.getElementsByTagName("table")[0].innerHTML + "</table>";
-				var even = doc.getElementsByClassName("TD_even");
-				for( var i=0, l=even.length; i<l; i++ )
+		
+				myJSONResponse = JSON.parse(this.responseText);
+				var data = [];
+				var labels = []
+				for (p in myJSONResponse)
 				{
-						cols = even[i].getElementsByTagName("td");
-						//newDiv.innerHTML = cols[1].innerHTML;
-						console.log( cols[1].innerHTML);
+					labels.push( p );
+					data.push( myJSONResponse[p][1]);
 				}
+				console.log(data);
+				var ctx = document.getElementById('chart_canvas').getContext('2d');
+				var myChart = new Chart(ctx, {
+				  type: 'line',
+				  data: {
+				    labels: labels,
+				    datasets: [{
+				      label: 'acd',
+				      data: data,
+				      backgroundColor: "rgba(153,255,51,0.4)"
+				    }]
+				  }
+				});
 	    	}
 		};
-			
-			//newDiv.innerHTML = "hello world";
-		xhttp.responseType = "document";
-		xhttp.withCredentials = true;
-		
-		xhttp.open("GET", "https://drill.gghc.com/orders_noMaster.aspx", true);
+		//xhttp.responseType = "document";
+		//xhttp.withCredentials = true;
+		var mmID = document.getElementById("ddlMoneyManagers").options[document.getElementById("ddlMoneyManagers").selectedIndex].value;
+		xhttp.open("GET", "https://drill.gghc.com/extras/performance/performance_graph_JSON.aspx?mm_id="+mmID+"&accttype_cd=ALL&from_dte=2016-10-10T20:00:00.000Z&_=1477474785832", false);
 		xhttp.send();
+
 }
+
+
 
 	
 //	var graphs = document.getElementsByClassName("highcharts-series-group");
