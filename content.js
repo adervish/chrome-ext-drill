@@ -75,7 +75,7 @@ else
 		div.style.height = "0px";
 		//div.innerHTML = "";
 
-		var newDiv = document.createElement("canvas");  
+		var newDiv = document.createElement("div");  
 		
 		div.style.display = 'none';
 		div.parentNode.appendChild(newDiv);
@@ -101,18 +101,21 @@ else
 					data.push( myJSONResponse[p][1]);
 				}
 				console.log(data);
-				var ctx = document.getElementById('chart_canvas').getContext('2d');
-				var myChart = new Chart(ctx, {
-				  type: 'line',
-				  data: {
-				    labels: labels,
-				    datasets: [{
-				      label: 'acd',
-				      data: data,
-				      backgroundColor: "rgba(153,255,51,0.4)"
-				    }]
-				  }
-				});
+				//var ctx = document.getElementById('chart_canvas').getContext('2d');
+		    var sampleSVG = d3.select("#chart_canvas")
+		        .append("svg")
+		        .attr("width", 100)
+		        .attr("height", 100);    
+			console.log(sampleSVG.id);
+
+		    sampleSVG.append("circle")
+		        .style("stroke", "gray")
+		        .style("fill", "white")
+		        .attr("r", 40)
+		        .attr("cx", 50)
+		        .attr("cy", 50)
+		        .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+		        .on("mouseout", function(){d3.select(this).style("fill", "white");});
 	    	}
 		};
 		//xhttp.responseType = "document";

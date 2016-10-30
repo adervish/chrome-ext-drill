@@ -8,7 +8,8 @@
     "webRequest", "webRequestBlocking"
   ],
   "content_scripts": [{
-    "js": [ "Chart.bundle.min.js", "content.js"],
+	  "css": ["techan.css"],
+    "js": [ "d3.v4.min.js", "techan.min.js", "Chart.bundle.min.js", "content.js"],
     "matches": ["https://drill.gghc.com/security_detail.aspx*", "https://drill.gghc.com/*"]
   }],
   "options_ui": {
